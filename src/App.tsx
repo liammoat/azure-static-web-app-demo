@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Text, Link, FontWeights, IStackTokens, IStackStyles, ITextStyles } from '@fluentui/react';
+import { Stack, Text, Link, FontWeights, IStackTokens, IStackStyles, ITextStyles, DefaultButton } from '@fluentui/react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -15,6 +15,12 @@ const stackStyles: Partial<IStackStyles> = {
 };
 
 export const App: React.FunctionComponent = () => {
+  let _onClick = () => {
+    fetch('/api/message?name=Fluent UI')
+      .then(response => response.text())
+      .then(text => console.log(text));
+  };
+
   return (
     <Stack horizontalAlign="center" verticalAlign="center" verticalFill styles={stackStyles} tokens={stackTokens}>
       <img className="App-logo" src={logo} alt="logo" />
@@ -38,6 +44,9 @@ export const App: React.FunctionComponent = () => {
         <Link href="https://developer.microsoft.com/en-us/fluentui#/styles/web/icons">Icons</Link>
         <Link href="https://developer.microsoft.com/en-us/fluentui#/styles/web">Styles</Link>
         <Link href="https://aka.ms/themedesigner">Theme designer</Link>
+      </Stack>
+      <Stack horizontal tokens={stackTokens} horizontalAlign="center">
+        <DefaultButton onClick={_onClick}>Click me</DefaultButton>
       </Stack>
     </Stack>
   );
